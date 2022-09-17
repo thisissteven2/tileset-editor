@@ -15,7 +15,18 @@ const Home = ({ assets, folders }: AssetsType) => {
 		<main className="layout">
 			<div className="py-8">
 				<h1 className="mb-2">Tileset Editor</h1>
-				<p className="mb-4">Create and Export your tileset assets!</p>
+				<p>Create and Export your tileset assets!</p>
+				<span className="mb-4 block">
+					Assets by:{" "}
+					<a
+						href="https://cupnooble.itch.io/sprout-lands-asset-pack"
+						target="_blank"
+						rel="noreferrer"
+						className="underline text-primary"
+					>
+						Cup Nooble
+					</a>
+				</span>
 				<ReferenceProvider>
 					<CanvasProvider>
 						<div className="flex gap-4 justify-between">
