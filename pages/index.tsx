@@ -22,7 +22,7 @@ const Home = ({ assets, folders }: AssetsType) => {
 							<Assets assets={assets} folders={folders} />
 							<CanvasConfig />
 						</div>
-						<div className="flex gap-8 justify-between flex-wrap items-end">
+						<div className="flex gap-8 justify-between flex-wrap">
 							<Tileset />
 							<div>
 								<Buttons />

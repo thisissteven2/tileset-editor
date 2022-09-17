@@ -14,7 +14,7 @@ export type AssetsType = {
 
 export default function Assets({ folders, assets }: AssetsType) {
 	const [selected, setSelected] = React.useState(() => folders[0]);
-	const [selectedAsset, setSelectedAsset] = React.useState(() => assets[selected][0]);
+	const [selectedAsset, setSelectedAsset] = React.useState(() => ASSETS_PATH + selected + assets[selected][0]);
 	const assetsSrc = assets[selected].map((asset) => ASSETS_PATH + selected + asset);
 
 	const { tilesetRef } = useReference();

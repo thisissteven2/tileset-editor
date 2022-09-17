@@ -1,4 +1,6 @@
 import React from "react";
+import { ASSETS_PATH } from "../components/Assets";
+import { download } from "./download";
 
 export const tileSize = 32;
 
@@ -8,7 +10,6 @@ export type Layer = {
 
 type DrawProps = {
 	canvasRef: React.MutableRefObject<HTMLCanvasElement>;
-	tilesetRef: React.MutableRefObject<HTMLImageElement>;
 	layersRef: React.MutableRefObject<Layer[]>;
 };
 
@@ -28,8 +29,7 @@ export const draw = ({ canvasRef, layersRef }: DrawProps) => {
 			if (ctx) ctx.imageSmoothingEnabled = false;
 
 			const image = document.createElement("img");
-			// bad code i know :/
-			image.src = src as unknown as string;
+			image.src = (ASSETS_PATH + src) as unknown as string;
 			image.onload = () => {
 				image.width = image.width * 2;
 				image.height = image.height * 2;
@@ -65,9 +65,10 @@ export const addOrDeleteTile = (
 	if (shiftKey) {
 		delete layers[layer][key];
 	} else {
-		layers[layer][key] = [selectedRef.current[0], selectedRef.current[1], tilesetRef.current.src];
+		const src = tilesetRef.current.src;
+		const [folder, asset] = src.split("/").slice(-2);
+		layers[layer][key] = [selectedRef.current[0], selectedRef.current[1], `${folder}/${asset}`];
 	}
-
 	layersRef.current = layers;
 };
 
@@ -79,4 +80,12 @@ export const exportImage = (canvasRef: React.MutableRefObject<HTMLCanvasElement>
 
 	const w = window.open("");
 	w?.document.write(image.outerHTML);
+};
+
+export const viewJSON = (layersRef: React.MutableRefObject<Layer[]>) => {
+	const generatedJSON = JSON.stringify(layersRef.current, null, "  ");
+
+	const w = window.open("");
+	w?.document.write(`<pre>${generatedJSON}</pre>`);
+	download("asset.txt", generatedJSON);
 };

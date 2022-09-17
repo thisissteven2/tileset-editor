@@ -22,7 +22,7 @@ export default function Tileset() {
 	}, [selectedRef, tilesetRef]);
 
 	return (
-		<div className="relative">
+		<div className="relative mt-12">
 			{/* eslint-disable-next-line @next/next/no-img-element */}
 			<img ref={tilesetRef} alt="Select an asset" className="text-primary" />
 			<Selector x={selected[0]} y={selected[1]} />

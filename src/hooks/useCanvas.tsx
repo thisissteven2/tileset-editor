@@ -29,7 +29,7 @@ export const CanvasProvider = ({ children }: { children: React.ReactNode }) => {
 
 	const { canvasRef, tilesetRef, layersRef, selectedRef } = useReference();
 
-	const updateCanvas = () => draw({ canvasRef, tilesetRef, layersRef });
+	const updateCanvas = () => draw({ canvasRef, layersRef });
 
 	const clearCanvas = () => {
 		layersRef.current = [{}, {}, {}];
